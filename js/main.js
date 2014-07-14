@@ -1,0 +1,19 @@
+$('document').ready(function(){
+    $('#contem').load('historia.html')
+    $('#puntventa').click(function(){
+        $(this).addClass('selected').siblings().removeClass('selected')
+        $('#contem').load('ubicaciones.html')
+    })
+    $('#puntosventa').click(function(){
+        $(this).addClass('selected').siblings().removeClass('selected')
+        $('#contem').load('logos.html')
+    })
+    $('#bconocen').click(function(){
+        $(this).addClass('selected').siblings().removeClass('selected')
+        $('#contem').load('infoprin.html')
+    })
+    $('#bhistoria').click(function(){
+        $(this).addClass('selected').siblings().removeClass('selected')
+        $('#contem').load('historia.html')
+    })
+})
