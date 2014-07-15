@@ -61,7 +61,7 @@ $id = $_GET['id'];
                    <div class="boton" id="butbusc">Buscar</div>
                </div>
                <?php
-                $sqlp = mysql_query("select id,nombre,descripcion,ciudad from posiciones where id = '$id'");
+                $sqlp = mysql_query("select id,nombre,descripcion,ciudad,instrucciones from posiciones where id = '$id'");
                 while($rp = mysql_fetch_assoc($sqlp)){
                 ?>
                 <div class="item3">
@@ -76,6 +76,10 @@ $id = $_GET['id'];
                     }
                     ?>
                     <p><?php echo $rp['descripcion'] ?></p>
+                    <div id="instrucciones">
+                    <h3>Como aplico?</h3>
+                    <p><?php echo $rp['instrucciones'] ?></p>
+                    </div>
                 </div>
                 <?php
                 }

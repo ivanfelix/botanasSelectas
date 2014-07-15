@@ -42,7 +42,7 @@
                     $sql = mysql_query("select nombre,id from posiciones");
                     while($r = mysql_fetch_assoc($sql)){
                     ?>
-                    <li><a href="productos.php?id=<?php echo $r['id'] ?>"><?php echo $r['nombre'] ?></a></li>
+                    <li id="<?php echo $r['id'] ?>"><a href="productos.php?id=<?php echo $r['id'] ?>"><?php echo $r['nombre'] ?></a><div title="Eliminar" class="eliminar"></div><div title="Editar" class="editar"></div></li>
                     <?php
                     }    
                     ?>
@@ -57,8 +57,30 @@
                             <input type="text" name="nombre">
                             <label>Descripción:</label>
                             <textarea name="descripcion"></textarea>
+                            <label>Estado:</label>
+                            <select id="selestado" onchange="ciudadEstado(this.value)" name="estado">
+                                <option value="Seleccionar">Seleccionar</option>
+                                <?php
+                                $esq = mysql_query("select * from estados");
+                                while($d = mysql_fetch_assoc($esq)){
+                                ?>
+                                <option value="<?php echo $d['id'] ?>"><?php echo $d['nombre'] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            <label>Ciudad:</label>
+                            <select id="selciudad" name="ciudad">
+                                <option value="Seleccionar">Seleccionar</option>
+                                <?php 
+                                $sqr = mysql_query("select * from ciudades where id_estado = '$id_estado'");
+                                ?>
+                            </select>
+                            <label>Instrucciones para aplicar:</label>
+                            <textarea name="instrucciones"></textarea>
                             <input id="benviar" type="button" value="Enviar">
                         </form>
+                        <div id="respuesta"></div>
                     </section>
                 </section>
             </section>
@@ -72,9 +94,30 @@
             $('#benviar').click(function(){
                 var valores = $('#bdt').serialize()
                 $.post('proc/registro_posicion.php',valores,function(resp){
-                    console.log(resp)
-                })
+                    $('#respuesta').html('La posicion '+resp.nombre+' fue registrada con exito').addClass('ok')
+                    $('#listasel li:last-child').after('<li id='+resp.id+'><a href="productos.php?id='+resp.id+'">'+resp.nombre+'</a><div title="Eliminar" class="eliminar"></div><div title="Editar" class="editar"></li>')
+                },'json')
             })
+            $('.eliminar').click(function(){
+                var padreid = $(this).parent().attr('id'),padre = $(this).parent();
+                var idenv ={id:padreid}
+                var preg = confirm("Esta seguro que desea eliminar esta posición?")
+                if(preg){
+                    $.post('proc/eliminar_posicion.php',idenv,function(resp){
+                        $('#respuesta').html(resp).addClass('ok')
+                    })
+                    padre.fadeOut();
+                }
+            })
+            function ciudadEstado(valor){
+                if(valor=="Seleccionar"){
+                    $('#selciudad').html('<option>Seleccionar</option>')
+                }
+                var mandar = {str:valor}
+                $.post('proc/cambioCiudad.php',mandar,function(resp){
+                    $('#selciudad').html(resp);
+                })
+            }
         </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
