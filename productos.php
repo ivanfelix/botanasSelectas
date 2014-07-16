@@ -27,8 +27,7 @@ require_once("conexion.php");
         <section id="cent">
             <section id="left">
                 <div id="busq">
-                   <input id="buscarb" type="text">
-                   <div class="boton" id="butbusc">Buscar</div>
+                   <input id="buscarb" type="text" placeholder="Buscar productos">
                </div>
             </section>
             <section id="ri2">

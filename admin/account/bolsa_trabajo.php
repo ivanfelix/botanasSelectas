@@ -54,9 +54,9 @@
                         <h4>Registrar una posición</h4>
                         <form id="bdt">
                             <label>Nombre de la posición:</label>
-                            <input type="text" name="nombre">
+                            <input type="text" name="nombre" id="cnombre">
                             <label>Descripción:</label>
-                            <textarea name="descripcion"></textarea>
+                            <textarea id="cdesc" name="descripcion"></textarea>
                             <label>Estado:</label>
                             <select id="selestado" onchange="ciudadEstado(this.value)" name="estado">
                                 <option value="Seleccionar">Seleccionar</option>
@@ -77,7 +77,7 @@
                                 ?>
                             </select>
                             <label>Instrucciones para aplicar:</label>
-                            <textarea name="instrucciones"></textarea>
+                            <textarea id="instrucciones" name="instrucciones"></textarea>
                             <input id="benviar" type="button" value="Enviar">
                         </form>
                         <div id="respuesta"></div>
@@ -91,12 +91,103 @@
         <script src="../../js/plugins.js"></script>
         <script src="../../js/main.js"></script>
         <script>
+            function validar(){
+                if($('#cnombre').val() == ''){
+                    if($('#cnombre').next().attr('class')== 'error'){
+                        $('#cnombre').next().remove()
+                        $('#cnombre').after('<div class="error">Debe ingresar un nombre</div>')
+                    $('#cnombre').focus()
+                    return false
+                    }else{
+                    $('#cnombre').after('<div class="error">Debe ingresar un nombre</div>')
+                    $('#cnombre').focus()
+                    return false
+                    }
+                }else{
+                    if($('#cnombre').next().attr('class')== 'error'){
+                        $('#cnombre').next().remove()
+                    }    
+                }
+                
+                if($('#cdesc').val() == ''){
+                    if($('#cdesc').next().attr('class')== 'error'){
+                        $('#cdesc').next().remove()
+                        $('#cdesc').after('<div class="error">Debe ingresar una descripcion</div>')
+                    $('#cdesc').focus()
+                    return false
+                    }else{
+                    $('#cdesc').after('<div class="error">Debe ingresar una descripcion</div>')
+                    $('#cdesc').focus()
+                    return false
+                    }
+                }else{
+                    if($('#cdesc').next().attr('class')== 'error'){
+                        $('#cdesc').next().remove()
+                    } 
+                }
+                
+                
+                if($('#selestado').val()=='Seleccionar'){
+                    if($('#selestado').next().attr('class')== 'error'){
+                        $('#selestado').next().remove()
+                        $('#selestado').after('<div class="error">Debe seleccionar un estado</div>')
+                    $('#selestado').focus()
+                    return false
+                    }else{
+                    $('#selestado').after('<div class="error">Debe seleccionar un estado</div>')
+                    $('#selestado').focus()
+                    return false
+                    }
+                }else{
+                    if($('#selestado').next().attr('class')== 'error'){
+                        $('#selestado').next().remove()
+                    } 
+                }
+                
+                if($('#selciudad').val()=='Seleccionar'){
+                    if($('#selciudad').next().attr('class')== 'error'){
+                        $('#selciudad').next().remove()
+                        $('#selciudad').after('<div class="error">Debe seleccionar una ciudad</div>')
+                    $('#selciudad').focus()
+                    return false
+                    }else{
+                    $('#selciudad').after('<div class="error">Debe seleccionar una ciudad</div>')
+                    $('#selciudad').focus()
+                    return false
+                    }
+                }else{
+                    if($('#selciudad').next().attr('class')== 'error'){
+                        $('#selciudad').next().remove()
+                    } 
+                }
+                
+                if($('#instrucciones').val() == ''){
+                    if($('#instrucciones').next().attr('class')== 'error'){
+                        $('#instrucciones').next().remove()
+                        $('#instrucciones').after('<div class="error">Debe ingresar instrucciones</div>')
+                    $('#instrucciones').focus()
+                    return false
+                    }else{
+                    $('#instrucciones').after('<div class="error">Debe ingresar instrucciones</div>')
+                    $('#instrucciones').focus()
+                    return false
+                    }
+                }else{
+                    if($('#instrucciones').next().attr('class')== 'error'){
+                        $('#instrucciones').next().remove()
+                    } 
+                }
+                
+                return true
+            }
             $('#benviar').click(function(){
-                var valores = $('#bdt').serialize()
-                $.post('proc/registro_posicion.php',valores,function(resp){
-                    $('#respuesta').html('La posicion '+resp.nombre+' fue registrada con exito').addClass('ok')
-                    $('#listasel li:last-child').after('<li id='+resp.id+'><a href="productos.php?id='+resp.id+'">'+resp.nombre+'</a><div title="Eliminar" class="eliminar"></div><div title="Editar" class="editar"></li>')
-                },'json')
+                if(validar()){
+                    var valores = $('#bdt').serialize()
+                    $.post('proc/registro_posicion.php',valores,function(resp){
+                        $('#respuesta').html('La posicion '+resp.nombre+' fue registrada con exito').addClass('ok')
+                        $('#listasel li:last-child').after('<li id='+resp.id+'><a href="productos.php?id='+resp.id+'">'+resp.nombre+'</a><div title="Eliminar" class="eliminar"></div><div title="Editar" class="editar"></li>')
+                    },'json')
+                }    
             })
             $('.eliminar').click(function(){
                 var padreid = $(this).parent().attr('id'),padre = $(this).parent();

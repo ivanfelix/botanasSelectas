@@ -134,6 +134,11 @@ ul{
     background:#f7f7f7;
     font-size:0.8em;
 }
+.error{
+    font-size: 0.8em;
+    color: red;
+    margin: 3px 0 6px;
+}
 .item:hover > .infofot {
     opacity: 1;
 }
@@ -141,19 +146,20 @@ ul{
     opacity: 1;
 }
 .item2 {
-    width:26%;
+    width:27%;
     position:relative;
     height:auto;
     box-shadow: 0 0 3px rgba(0,0,0,0.1);
     display: inline-block;
     vertical-align: top;
     border: solid #f7f7f7 10px;
-    margin:0px 6px 10px 0;
+    margin:0px 1.2% 10px 0;
     background:#fff;
     padding: 10px;
 }
 .item2 p{
     margin: 5px 0 0;
+    height: 35px;
 }
 small{
     font-size: 0.8em;
@@ -522,6 +528,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00606060', e
     margin-top: 20px;
 }
 #buscarb {
+    text-align: right;
     display: inline-block;
     border: none;
     padding: 7px;
@@ -550,18 +557,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00606060', e
 
 
 #uni {
-    background: #efefef;
-    background: #efefef;
-    height: 200px;
+    background: #fff;
     margin-top: 20px;
+}
+#uni img{
+    width: 100%;
 }
 
 #categ {
+    width: 100%;
 }
 #categ li{
     padding: 7px 20px;
     margin-bottom: 5px;
     cursor: pointer;
+    width: 34%;
     background: #fff;
     box-shadow: 0px 1px 1px rgba(0,0,0,0.2);
     position: relative;
@@ -815,18 +825,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 
 .imgsh {
-    width: 27px;
-    height: 30px;
-    display: inline-block;
-    margin-right: 6px;
-    vertical-align: middle;
+    width: 22px;
+    height: 29px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     background: url(../img/sprite.png);
-    background-position: -176px -2px;
+    background-position: -179px -2px;
 }
-
+.bots a{
+    display: inline-block;
+}
 .botsh {
     cursor: pointer;
     position: relative;
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
     display: inline-block;
     vertical-align: top;
     font-weight: 800;
@@ -834,7 +852,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     transition: all ease-out 0.3s;
     border-radius: 3px;
     box-shadow:1px 1px 3px rgba(0,0,0,0.1);
-    padding: 0px 0 0 5px;
+    padding: 0px;
     font-size: 0.9em;
     background: rgb(211,211,211); /* Old browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -912,6 +930,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     background: #fff;
     padding: 20px;
 }
+#sprod input[type=text],#sprod textarea,#sprod select{
+    width: 100%;
+}
 #sprod h4{
     margin: 0 0 10px;
 }
@@ -922,9 +943,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 #bdt {
-    width: 50%;
+    width: 40%;
     display: inline-block;
     vertical-align: top;
+    margin-right: 10%;
     font-size: 0.9em;
 }
 input,textarea,select{
@@ -983,4 +1005,10 @@ input,textarea,select{
 
 #instrucciones {
     font-size: 0.9em;
+}
+
+#infouni {
+    margin: 20px;
+    font-size: 0.9em;
+    padding-bottom: 1px;
 }

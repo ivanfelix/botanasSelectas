@@ -23,43 +23,33 @@ require_once('conexion.php');
         <!--[if lt IE 8]>
             <p class="browsehappy">Estas usando un navegador <strong>obsoleto!!!</strong>. Te recomendamos <a href="http://browsehappy.com/">actualizar tu navegador</a> para una mejor experiencia &nbsp; :)</p>
         <![endif]-->
-        <header>
-            <section class="cont">
-                <a id="logo" href=""><img src="img/logo.jpg"></a>
-                <nav id="menu">
-                    <ul>
-                        <li><a href="/">Inicio</a></li>
-                        <li><a href="empresa.html">Empresa</a></li>
-                        <li><a href="productos.html">Productos</a></li>
-                        <li><a href="galeria.html">Galeria</a></li>
-                        <li><a href="">Distribuición</a></li>
-                        <li><a href="bolsadetrabajo.html">Bolsa de Trabajo</a></li>
-                    </ul>
-                </nav>
-            </section>
-        </header>
+        <?php include('header.php'); ?>
         <section id="cent">
             <section id="left">
                <div id="categ">
+                   <ul id="l_est">
                   <?php
                     $sql = mysql_query("select * from ciudades left join estados on ciudades.id_estado = estados.id  group by estados.nombre");
                     while($r = mysql_fetch_assoc($sql)){
                     ?>
-                   <ul>
                         <li id="<?php echo $r['id'] ?>"><?php echo $r['nombre'] ?></li>
-                    </ul>
                     <?php
                     }  
                     ?>
+                    </ul>
                </div>
-                <div id="uni"></div>
-                
+                <div id="uni">
+                    <img src="img/IMG_2584t.jpg">
+                    <div id="infouni">
+                        <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, perspiciatis magnam eius, tempora iusto, dolorum.</h4>
+                    </div>    
+                </div>
             </section>
             <section id="ri2">
               <div id="busq">
-                   <input id="buscarb" type="text">
-                   <div class="boton" id="butbusc">Buscar</div>
+                   <input id="buscarb" type="text" placeholder="Buscar posición" >
                </div>
+               <div id="insertar">
                <?php
                 $sqlp = mysql_query("select id,nombre,descripcion,ciudad from posiciones");
                 while($rp = mysql_fetch_assoc($sqlp)){
@@ -86,6 +76,7 @@ require_once('conexion.php');
                 <?php
                 }  
                 ?>
+                </div>
             </section>
         </section>
 
@@ -93,7 +84,27 @@ require_once('conexion.php');
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-
+        <script>
+            $('#l_est li').click(function(){
+                var elid = $(this).attr('id')
+                var envio = {id:elid}
+                $.post('admin/account/proc/filtro_estado.php',envio,function(resp){
+                    $('#insertar').empty()
+                    for(pos in resp.posiciones){
+                        $('#insertar').append('<div class="item2"><h2>'+resp.posiciones[pos].nombre+'</h2><p>'+resp.posiciones[pos].descripcion+'</p><small>'+resp.posiciones[pos].ciudad+'</small><div class="bots"><div class="botsh" title="Compartir"><div class="imgsh"></div></div><a href="detalletrabajo.php?id='+resp.posiciones[pos].id+'"><div class="boton">Ver posicion</div></a></div></div></div>')
+                    }
+                },'json')
+            })
+            $('#buscarb').keyup(function(){
+                var datos = $('#buscarb').val(),enviar = {datoenv:datos}
+                 $.post('admin/account/proc/filtro_buscador.php',enviar,function(resp){
+                    $('#insertar').empty()
+                    for(pos in resp.posiciones){
+                        $('#insertar').append('<div class="item2"><h2>'+resp.posiciones[pos].nombre+'</h2><p>'+resp.posiciones[pos].descripcion+'</p><small>'+resp.posiciones[pos].ciudad+'</small><div class="bots"><div class="botsh" title="Compartir"><div class="imgsh"></div></div><a href="detalletrabajo.php?id='+resp.posiciones[pos].id+'"><div class="boton">Ver posicion</div></a></div></div></div>')
+                    }
+                },'json')
+            })
+        </script>
        
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

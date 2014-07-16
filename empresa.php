@@ -20,21 +20,7 @@
         <!--[if lt IE 8]>
             <p class="browsehappy">Estas usando un navegador <strong>obsoleto!!!</strong>. Te recomendamos <a href="http://browsehappy.com/">actualizar tu navegador</a> para una mejor experiencia &nbsp; :)</p>
         <![endif]-->
-        <header>
-            <section class="cont">
-                <a id="logo" href=""><img src="img/logo.jpg"></a>
-                <nav id="menu">
-                    <ul>
-                        <li><a href="/">Inicio</a></li>
-                        <li><a href="empresa.html">Empresa</a></li>
-                        <li><a href="productos.html">Productos</a></li>
-                        <li><a href="galeria.html">Galeria</a></li>
-                        <li><a href="">Distribuición</a></li>
-                        <li><a href="bolsadetrabajo.html">Bolsa de Trabajo</a></li>
-                    </ul>
-                </nav>
-            </section>
-        </header>
+        <?php include('header.php');?>
         <section id="cent">
             <section id="left">
                 <section id="historia">
