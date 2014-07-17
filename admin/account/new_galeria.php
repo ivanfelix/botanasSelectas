@@ -35,10 +35,11 @@
         </header>
         <section id="cent">
             <section id="left">
+               
                 <ul id="listasel">
-                    <li id="lipri">Productos</li>
+                   <li id="lipri">Fotos</li>
                    <?php
-                    $sql = mysql_query("select id,nombre from productos");
+                    $sql = mysql_query("select id,nombre from fotos");
                     while($r = mysql_fetch_assoc($sql)){
                     ?>
                     <li id="<?php echo $r['id'] ?>"><a href="productos.php?id=<?php echo $r['id'] ?>"><?php echo $r['nombre'] ?></a><div title="Eliminar" class="eliminar"></div><div title="Editar" class="editar"></div></li>
@@ -46,31 +47,16 @@
                     }    
                     ?>
                 </ul>
+                
             </section>
                 <section id="ri2">
                     <section id="sprod">
-                        <h4>Registrar un producto</h4>
-                        <form>
-                            <label>Nombre del producto:</label>
-                            <input type="text">
-                            <label>Descripción:</label>
-                            <textarea></textarea>
-                            <label>Foto del producto:</label>
-                            <input type="file">
-                            <label>Foto dos:</label>
-                            <input type="file">
-                            <div id="tabla">
-                                <label>Producto</label>
-                                <input type="text">
-                                <label>Numero</label>
-                                <input type="text">
-                                <label>Por porción</label>
-                                <input type="text">
-                                <label>Kcal</label>
-                                <input type="text">
-                            </div>
-                            <input type="button" value="Enviar">
+                        <h4>Subir fotos a la galería</h4>
+                        <form id="bdt" method="post" action="proc/registro_fotos.php" enctype="multipart/form-data">
+                            <input type="file" id="file" name="files[]" multiple accept="image/*" >
+                            <input id="benviar" type="submit" value="Enviar">
                         </form>
+                        <div id="respuesta"></div>
                     </section>
                 </section>
             </section>
@@ -80,6 +66,19 @@
         <script>window.jQuery || document.write('<script src="../../js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="../../js/plugins.js"></script>
         <script src="../../js/main.js"></script>
+        <script>
+            $('.eliminar').click(function(){
+                var padreid = $(this).parent().attr('id'),padre = $(this).parent();
+                var idenv ={id:padreid}
+                var preg = confirm("Esta seguro que desea eliminar esta posición?")
+                if(preg){
+                    $.post('proc/eliminar_posicion.php',idenv,function(resp){
+                        $('#respuesta').html(resp).addClass('ok')
+                    })
+                    padre.fadeOut();
+                }
+            })
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

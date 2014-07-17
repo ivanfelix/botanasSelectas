@@ -1,5 +1,5 @@
 <?php
-require_once("conexion.php");
+    include_once('conexion.php');
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -25,26 +25,41 @@ require_once("conexion.php");
         <![endif]-->
         <?php include('header.php') ?>
         <section id="cent">
-            <section id="left">
-                <div id="busq">
-                   <input id="buscarb" type="text" placeholder="Buscar productos">
+            <section id="centm">
+                <section id="lm">
+                    
+                </section>
+                <section id="minf">
+                    <h2>Maquinas VENDING (Saltillo) para tu
+EMPRESA
+NEGOCIO
+LUGAR DE TRABAJO
+UNIVERSIDAD
+ETC...
+</h2>
+                   <p>Contamos con:
+Los precios mas bajos
+Gran variedad de productos en diferentes presentaciones 
+Excelente servicio
+10% en ventas se entregan con producto para eventos de la empresa (solo empresa)
+</p>
+               <div id="infcm">
+                   <h5>INTERESADOS:</h5>
+                   <p>Por favor llene el siguiente  formulario con sus datos:</p>
                </div>
-            </section>
-            <section id="ri2">
-                <section id="insertar">
-               <?php
-                $sql=mysql_query("select * from productos");
-                while($r=mysql_fetch_assoc($sql)){
-                ?>
-                <div class="item4">
-                    <img src="img/IMG_2584t.jpg">
-                    <div class="infofot">
-                        <h3><a href="detalle.php?id=<?php echo $r['id']?>"><?php echo $r['nombre']; ?></a></h3>
-                    </div>
-                </div>
-                <?php
-                }
-                ?>
+               <div id="fmaq">
+                   <form>
+                        <label>Empresa:</label>
+                       <input type="text">
+                       <label>No de trabajadores:</label>
+                       <input type="text">
+                       <label>No de máquinas:</label>
+                       <input type="text">
+                       <label>Contacto:</label>
+                       <input type="text">
+                       <input class="boton" type="button" value="Enviar">
+                   </form>
+               </div>
                 </section>
             </section>
         </section>
@@ -53,18 +68,7 @@ require_once("conexion.php");
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-        <script>
-            $('#buscarb').keyup(function(){
-                var datos = $('#buscarb').val(),enviar = {datoenv:datos}
-                 $.post('admin/account/proc/filtro_buscadorprod.php',enviar,function(resp){
-                    $('#insertar').empty()
-                    for(pos in resp.posiciones){
-                        $('#insertar').append('<div class="item4"><img src="img/IMG_2584t.jpg"><div class="infofot"><h3><a href="detalle.php?id='+resp.posiciones[pos].nombre+'">'+resp.posiciones[pos].nombre+'</a></h3></div></div>')
-                    }
-                },'json')
-            })
-        </script>
-       
+
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

@@ -38,6 +38,7 @@
                 <ul id="listasel">
                     <li><a href="productos.php">Productos</a></li>
                     <li><a href="bolsa_trabajo.php">Bolsa de trabajo</a></li>
+                    <li><a href="new_galeria.php">Galería</a></li>
                 </ul>
             </section>
                 <section id="ri2">

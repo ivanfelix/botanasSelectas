@@ -1,3 +1,6 @@
+<?php 
+require_once('conexion.php');
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -23,29 +26,18 @@
         <![endif]-->
         <?php include('header.php'); ?>
         <section id="cent">
-            <section id="left">
-            </section>
-            <section id="ri2">
+            <section id="ri5">
                 <section id="container">
+                   <?php
+                    $sql = mysql_query("select * from fotos");
+                    while($r = mysql_fetch_assoc($sql)){
+                    ?>
                     <div class="grid-sizer item">
-                        <img src="img/IMG_2584t.jpg">
-                        <div class="infofot">
-                            <h3><a rel="prettyPhoto[pp_gal]" href="img/IMG_2584t.jpg">Nombre de la foto</a></h3>
-                        </div>
+                        <a rel="prettyPhoto[pp_gal]" href="img/galeria/<?php echo $r['nombre'] ?>"><img src="img/galeria/<?php echo $r['nombre'] ?>"></a>
                     </div>
-                    <div class="grid-sizer item">
-                        <img src="img/IMG_2581t.jpg">
-                        <div class="infofot">
-                            <h3><a rel="prettyPhoto[pp_gal]" href="img/IMG_2581t.jpg">Nombre de la foto</a></h3>
-                        </div>
-                    </div>
-                    <div class="grid-sizer item">
-                        <img src="img/IMG_2584t.jpg">
-                    </div>
-                    <div class="grid-sizer item">
-                        <img src="img/IMG_2581t.jpg">
-                    </div>
-                    
+                    <?php
+                    }
+                    ?>
                 </section>
             </section>
         </section>

@@ -1,6 +1,6 @@
 <?php
-require_once("conexion.php");
-$id = $_GET['id'];
+    include_once('../conexion.php');
+    include_once('clases.php');
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -16,43 +16,43 @@ $id = $_GET['id'];
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link type="text/plain" rel="author" href="humans.txt">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <link rel="stylesheet" href="../css/normalize.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="browsehappy">Estas usando un navegador <strong>obsoleto!!!</strong>. Te recomendamos <a href="http://browsehappy.com/">actualizar tu navegador</a> para una mejor experiencia &nbsp; :)</p>
         <![endif]-->
-        <?php include('header.php') ?>
+        <?php include('../header.php') ?>
+        <section id="listado">
+           <?php
+            $pr = new Prueba();
+            $uno = '*';
+            $dos = 'ciudades';
+            ?>
+            <ul>
+                <?php $pr->nueva($uno,$dos); ?>
+            </ul>
+        </section>
         <section id="cent">
-            <section id="left">
-            </section>
-            <section id="ri3">
-               <?php
-                $sql=mysql_query("select * from productos where id = '$id'");
-                while($r=mysql_fetch_assoc($sql)){
-                ?>
-                <div id="fgr">
-                    
-                </div>
-                <div id="infofp">
-                    <h1><?php echo $r['nombre'] ?></h1>
-                    <p><?php echo $r['descripcion'] ?></p>
-                    <div id="likes"></div>
-                    </div>
-                <?php
-                }
-                ?>
-            </section>
+           <input type="text" id="valor_uno">
+           <input type="text" id="valor_dos">
+           <input id="elb" type="button" value="Enviar">
         </section>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-
-       
+        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="../js/plugins.js"></script>
+        <script src="../js/main.js"></script>
+        
+        <script>
+            $('#elb').click(function(){
+                var valor_uno = $('#valor_uno').val(), valor_dos = $('#valor_dos').val()
+                console.log(valor_uno,valor_dos)
+            })
+        </script>
+        
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

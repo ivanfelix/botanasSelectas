@@ -8,6 +8,7 @@
                         <li><a href="productos.php">Productos</a></li>
                         <li><a href="galeria.php">Galeria</a></li>
                         <li><a href="">Distribuición</a></li>
+                        <li><a href="maquinasvending.php">Máquinas vending</a></li>
                         <li><a href="bolsadetrabajo.php">Bolsa de Trabajo</a></li>
                     </ul>
                 </nav>
